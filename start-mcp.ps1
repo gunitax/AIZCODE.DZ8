@@ -21,16 +21,23 @@ foreach ($path in @($exe, $epf, $profile, (Join-Path $workBase '1Cv8.1CD'))) {
 }
 
 # Клиент тестирования на рабочей базе: порт 48000 — из профиля VAParams-mcp.json.
-$clientArgs = @(
-    'ENTERPRISE', "/F`"$workBase`"", "/N$User", '/TESTCLIENT', '-TPort', '48000',
-    '/Lru', '/VLru'
-)
-Start-Process -FilePath $exe -ArgumentList $clientArgs -WorkingDirectory $logs
+# Если клиент уже слушает порт (повторный запуск скрипта), второй не плодить.
+$clientRunning = [bool](Get-NetTCPConnection -LocalPort 48000 -State Listen -ErrorAction SilentlyContinue)
+if (-not $clientRunning) {
+    $clientArgs = @(
+        'ENTERPRISE', "/F`"$workBase`"", "/N$User", '/TESTCLIENT', '-TPort', '48000',
+        '/Lru', '/VLru'
+    )
+    Start-Process -FilePath $exe -ArgumentList $clientArgs -WorkingDirectory $logs
+    Start-Sleep -Seconds 5
+} else {
+    Write-Host 'Клиент тестирования уже запущен (порт 48000) — не перезапускаю.'
+}
 
-Start-Sleep -Seconds 5
-
-# Менеджер тестирования с MCP-сервером — в базе-менеджере.
-$command = "QuietInstallVanessaExt;runMcp;mcpPort=48100;VAParams=$profile"
+# Менеджер тестирования с MCP-сервером — в базе-менеджере. StartFeaturePlayer плюс загрузка
+# и выполнение tools\reg-mcp.feature на старте: этот сценарий регистрирует инструменты
+# Vanessa в MCP-сервере; без него наружу торчит только infobase_info.
+$command = "StartFeaturePlayer;QuietInstallVanessaExt;ЗагрузитьФичи;ВыполнитьСценарии;КаталогФич=$root\tools\reg-mcp.feature;runMcp;mcpPort=48100;VAParams=$profile"
 $managerArgs = @(
     'ENTERPRISE', "/F`"$managerBase`"", '/TESTMANAGER', '/Lru', '/VLru',
     '/DisableStartupDialogs', '/DisableStartupMessages',

@@ -65,6 +65,12 @@ description: >-
 - После загрузки расширения в базу открытый клиент тестирования видит старое
   расширение: перезапустить клиент (раздел «Под своё окружение»), затем снова
   `connect`. Менеджер не перезапускать — сессия MCP у агента пропадёт.
+- Менеджер, запущенный только с `runMcp`, отдает один инструмент `infobase_info`.
+  Полный набор регистрирует сценарий `tools\reg-mcp.feature` (`Ванесса.МодульMCPVA()
+  .ЗарегистрироватьИнструментыMCP()`), его выполняет стартовая команда менеджера
+  (`StartFeaturePlayer;ЗагрузитьФичи;ВыполнитьСценарии;КаталогФич=...\reg-mcp.feature`);
+  успех — строка `==MCP-OK== Инструменты MCP зарегистрированы` в `logs\manager.log`.
+  Инструменты видны только сессии агента, начавшейся после регистрации.
 - Шаг с кодом «на сервере (Расширение)» без подключенного клиента падает
   («Клиент тестирования не подключен») — подключить клиента шагом из `Контекста`
   или взять шаг «на сервере» без «(Расширение)».
@@ -169,7 +175,7 @@ start "" "C:\Program Files\1cv8\8.5.1.1529\bin\1cv8c.exe" ENTERPRISE /F"Q:\infob
 start "" "C:\Program Files\1cv8\8.5.1.1529\bin\1cv8c.exe" ENTERPRISE /F"C:\vanessa\va-manager85" /TESTMANAGER /Lru /VLru ^
   /DisableStartupDialogs /DisableStartupMessages /Out "Q:\AIZCODE.DZ8\logs\manager.log" ^
   /Execute "Q:\AIZCODE.DZ8\tools\vanessa-automation-single.epf" ^
-  /C"QuietInstallVanessaExt;runMcp;mcpPort=48100;VAParams=Q:\AIZCODE.DZ8\logs\VAParams-mcp.json"
+  /C"StartFeaturePlayer;QuietInstallVanessaExt;ЗагрузитьФичи;ВыполнитьСценарии;КаталогФич=Q:\AIZCODE.DZ8\tools\reg-mcp.feature;runMcp;mcpPort=48100;VAParams=Q:\AIZCODE.DZ8\logs\VAParams-mcp.json"
 ```
 
 Клиент тестирования закрылся или в базу загрузили расширение — закрыть окно клиента
