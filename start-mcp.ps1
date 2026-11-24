@@ -35,9 +35,11 @@ if (-not $clientRunning) {
 }
 
 # Менеджер тестирования с MCP-сервером — в базе-менеджере. StartFeaturePlayer плюс загрузка
-# и выполнение tools\reg-mcp.feature на старте: этот сценарий регистрирует инструменты
-# Vanessa в MCP-сервере; без него наружу торчит только infobase_info.
-$command = "StartFeaturePlayer;QuietInstallVanessaExt;ЗагрузитьФичи;ВыполнитьСценарии;КаталогФич=$root\tools\reg-mcp.feature;runMcp;mcpPort=48100;VAParams=$profile"
+# и выполнение tools\mcp\reg-mcp.feature на старте: этот сценарий включает Vanessa Editor,
+# инициализирует редактор и регистрирует инструменты MCP (без него наружу торчит только
+# infobase_info). КаталогФич обязан быть каталогом (не файлом): если это файл, Vanessa
+# сбрасывает флаг редактора. Ключ SPPR не использовать: он ломает автозапуск сценариев.
+$command = "StartFeaturePlayer;QuietInstallVanessaExt;ЗагрузитьФичи;ВыполнитьСценарии;КаталогФич=$root\tools\mcp;runMcp;mcpPort=48100;VAParams=$profile"
 $managerArgs = @(
     'ENTERPRISE', "/F`"$managerBase`"", '/TESTMANAGER', '/Lru', '/VLru',
     '/DisableStartupDialogs', '/DisableStartupMessages',

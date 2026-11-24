@@ -66,11 +66,27 @@ description: >-
   расширение: перезапустить клиент (раздел «Под своё окружение»), затем снова
   `connect`. Менеджер не перезапускать — сессия MCP у агента пропадёт.
 - Менеджер, запущенный только с `runMcp`, отдает один инструмент `infobase_info`.
-  Полный набор регистрирует сценарий `tools\reg-mcp.feature` (`Ванесса.МодульMCPVA()
+  Полный набор регистрирует сценарий `tools\mcp\reg-mcp.feature` (`Ванесса.МодульMCPVA()
   .ЗарегистрироватьИнструментыMCP()`), его выполняет стартовая команда менеджера
-  (`StartFeaturePlayer;ЗагрузитьФичи;ВыполнитьСценарии;КаталогФич=...\reg-mcp.feature`);
+  (`StartFeaturePlayer;ЗагрузитьФичи;ВыполнитьСценарии;КаталогФич=...\tools\mcp`);
   успех — строка `==MCP-OK== Инструменты MCP зарегистрированы` в `logs\manager.log`.
   Инструменты видны только сессии агента, начавшейся после регистрации.
+- Инструменты `open_feature_file`, `check_syntax`, `load_features` требуют Vanessa
+  Editor. На платформе 8.5.1.1529 (тонкий клиент) редактор **не работает**: JS-объект
+  `VanessaGherkinProvider` в HTML-поле не появляется даже с чистым кешем редактора
+  (`Ошибка инициализации редактора: ... setSuggestWidgetWidth` в журнале регистрации
+  базы менеджера), инициализация сама сбрасывает флаг. Проверено 25.11.2026.
+- Рабочий MCP-прогон на этой машине — по дереву, без редактора: `run_scenario` с
+  `mode: all` (без него дерево не стартует). Сценарий для прогона должен лежать в
+  каталоге `tools\mcp\` (его загружает стартовая команда менеджера); `features\`
+  держит эталон, копию в `tools\mcp\` обновлять при правке эталона. Результат —
+  markdown с поименным списком сценариев и статусом каждого; итоговый успех
+  подтверждается еще и пакетным прогоном (см. ниже).
+- Инструменты `open_feature_file`, `check_syntax`, `run_scenario` требуют включенного
+  Vanessa Editor: в `VAParams-mcp.json` должно быть
+  `"ИспользоватьРедакторVanessaEditor": true` (флаг читается менеджером при старте).
+  Без него они падают: `ACTION_FAILED: Vanessa Editor отключен в настройках
+  Vanessa Automation.` — при этом `manage_test_client connect` работает.
 - Шаг с кодом «на сервере (Расширение)» без подключенного клиента падает
   («Клиент тестирования не подключен») — подключить клиента шагом из `Контекста`
   или взять шаг «на сервере» без «(Расширение)».
@@ -137,6 +153,7 @@ DisableUnsafeActionProtection=.*va-manager.*
 ```json
 {
   "ИспользоватьКомпонентуVanessaExt": true,
+  "ИспользоватьРедакторVanessaEditor": true,
   "ИскатьЭлементыФормыПоИмени": true,
   "ТаймаутЗапуска1С": 120,
   "ДиапазонПортовTestclient": "48000-48049",
@@ -175,8 +192,16 @@ start "" "C:\Program Files\1cv8\8.5.1.1529\bin\1cv8c.exe" ENTERPRISE /F"Q:\infob
 start "" "C:\Program Files\1cv8\8.5.1.1529\bin\1cv8c.exe" ENTERPRISE /F"C:\vanessa\va-manager85" /TESTMANAGER /Lru /VLru ^
   /DisableStartupDialogs /DisableStartupMessages /Out "Q:\AIZCODE.DZ8\logs\manager.log" ^
   /Execute "Q:\AIZCODE.DZ8\tools\vanessa-automation-single.epf" ^
-  /C"StartFeaturePlayer;QuietInstallVanessaExt;ЗагрузитьФичи;ВыполнитьСценарии;КаталогФич=Q:\AIZCODE.DZ8\tools\reg-mcp.feature;runMcp;mcpPort=48100;VAParams=Q:\AIZCODE.DZ8\logs\VAParams-mcp.json"
+  /C"StartFeaturePlayer;QuietInstallVanessaExt;ЗагрузитьФичи;ВыполнитьСценарии;КаталогФич=Q:\AIZCODE.DZ8\tools\mcp;runMcp;mcpPort=48100;VAParams=Q:\AIZCODE.DZ8\logs\VAParams-mcp.json"
 ```
+
+Сценарий `reg-mcp.feature` не только регистрирует инструменты, но и включает Vanessa
+Editor (флаг `ИспользоватьРедакторVanessaEditor`): Vanessa при старте из командной
+строки сбрасывает его сама, а ключ `SPPR` вместо этого ломает автозапуск сценариев —
+поэтому флаг включается кодом в том же сценарии, после загрузки настроек.
+`КаталогФич` обязан быть каталогом (не файлом): если это файл, Vanessa сбрасывает
+флаг редактора при `ЗагрузитьФичи`. Все feature-файлы из этого каталога попадают
+в дерево прогона и выполняются `run_scenario` с `mode: all`.
 
 Клиент тестирования закрылся или в базу загрузили расширение — закрыть окно клиента
 и запустить его первой командой снова; менеджер не трогать.
