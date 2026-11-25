@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ConfigDumpInfo xmlns="http://v8.1c.ru/8.3/xcf/dumpinfo" xmlns:xen="http://v8.1c.ru/8.3/xcf/enums" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" format="Hierarchical" version="2.21">
+	<ConfigVersions>
+		<Metadata name="CommonPicture.ЗаполнитьФорму" id="82ea947e-f02e-4f97-8e0e-d8d0efe06ea4" configVersion="e16b656ea9096cad3ddfa8671136b92246cbb5e9"/>
+		<Metadata name="CommonPicture.Органайзер" id="d3fb6569-b9b2-416d-95f2-466b2f29c38f" configVersion="af8cb00a46fcaef534ffc50bd807801a016fb192"/>
+		<Metadata name="CommonPicture.СохранитьФайлКак" id="5fe61fef-61f9-4d7c-9c3b-6ef0ea79f10b" configVersion="5bf3fbdf8ba289c534def7fe4ae025ce73cd4bd9"/>
+		<Metadata name="Configuration.PriceInInvoice" id="470a77cd-07e4-4d80-8fe4-c528f3ebdc06" configVersion="c8d95b4fb61fc58f08b5ebad91bdb1df2723819d"/>
+		<Metadata name="Document._ДемоСчетНаОплатуПокупателю" id="3361e997-fedf-4cb4-a225-009d1992b5b4" configVersion="3692a85f8f4bf729ecbfc47d9fa6af8dd1a1d43e"/>
+		<Metadata name="Document._ДемоСчетНаОплатуПокупателю.Form.ФормаДокумента" id="783bb6be-eaf6-4b3a-bd0e-92fb5666e0b9" configVersion="d2bb24ece50c7108bf2c22ad20d8012b317aff0d"/>
+		<Metadata name="Document._ДемоСчетНаОплатуПокупателю.Form.ФормаДокумента.Form" id="783bb6be-eaf6-4b3a-bd0e-92fb5666e0b9.0" configVersion="3ee7756a3d30e208cbbc7fe50bb5b69f4a7853ba"/>
+		<Metadata name="Language.Русский" id="7f05ab60-6b39-4b4c-9ede-ec9f0815c6d6" configVersion="58f26d51a00b7757d82fe618300118df26e403c8"/>
+	</ConfigVersions>
+</ConfigDumpInfo>

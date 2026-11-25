@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<MetaDataObject xmlns="http://v8.1c.ru/8.3/MDClasses" xmlns:app="http://v8.1c.ru/8.2/managed-application/core" xmlns:cfg="http://v8.1c.ru/8.1/data/enterprise/current-config" xmlns:cmi="http://v8.1c.ru/8.2/managed-application/cmi" xmlns:ent="http://v8.1c.ru/8.1/data/enterprise" xmlns:lf="http://v8.1c.ru/8.2/managed-application/logform" xmlns:pal="http://v8.1c.ru/8.1/data/ui/colors/palette" xmlns:style="http://v8.1c.ru/8.1/data/ui/style" xmlns:sys="http://v8.1c.ru/8.1/data/ui/fonts/system" xmlns:v8="http://v8.1c.ru/8.1/data/core" xmlns:v8ui="http://v8.1c.ru/8.1/data/ui" xmlns:web="http://v8.1c.ru/8.1/data/ui/colors/web" xmlns:win="http://v8.1c.ru/8.1/data/ui/colors/windows" xmlns:xen="http://v8.1c.ru/8.3/xcf/enums" xmlns:xpr="http://v8.1c.ru/8.3/xcf/predef" xmlns:xr="http://v8.1c.ru/8.3/xcf/readable" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="2.21">
+	<Document uuid="3361e997-fedf-4cb4-a225-009d1992b5b6">
+		<InternalInfo>
+			<xr:GeneratedType name="DocumentObject._ДемоСчетНаОплатуПокупателю" category="Object">
+				<xr:TypeId>4bb74c86-c4f6-4c1c-aa62-3eb29ac013c3</xr:TypeId>
+				<xr:ValueId>3220d443-ae8c-41d4-adeb-0a92414f0829</xr:ValueId>
+			</xr:GeneratedType>
+			<xr:GeneratedType name="DocumentRef._ДемоСчетНаОплатуПокупателю" category="Ref">
+				<xr:TypeId>324a0606-5b6c-4261-b0a1-35d2d9a7ee7a</xr:TypeId>
+				<xr:ValueId>5d6c5725-08d4-483c-8c98-1e4ebb25b195</xr:ValueId>
+			</xr:GeneratedType>
+			<xr:GeneratedType name="DocumentSelection._ДемоСчетНаОплатуПокупателю" category="Selection">
+				<xr:TypeId>b65d4c93-7970-4639-b944-0c4358f8ef5f</xr:TypeId>
+				<xr:ValueId>4b6265aa-c055-4dc2-9638-cb2c5cfaf61c</xr:ValueId>
+			</xr:GeneratedType>
+			<xr:GeneratedType name="DocumentList._ДемоСчетНаОплатуПокупателю" category="List">
+				<xr:TypeId>782034c4-d008-4743-b58b-a6acfcaae706</xr:TypeId>
+				<xr:ValueId>6a19cc31-59d2-499b-a69a-9c523919a362</xr:ValueId>
+			</xr:GeneratedType>
+			<xr:GeneratedType name="DocumentManager._ДемоСчетНаОплатуПокупателю" category="Manager">
+				<xr:TypeId>f5639ea6-766a-44b5-86f2-b91679fa7b4d</xr:TypeId>
+				<xr:ValueId>22ae8922-3d51-4b3c-ac92-2d9e53432048</xr:ValueId>
+			</xr:GeneratedType>
+		</InternalInfo>
+		<Properties>
+			<ObjectBelonging>Adopted</ObjectBelonging>
+			<Name>_ДемоСчетНаОплатуПокупателю</Name>
+			<Comment/>
+			<RegisterRecords/>
+		</Properties>
+		<ChildObjects>
+			<Form>ФормаДокумента</Form>
+		</ChildObjects>
+	</Document>
+</MetaDataObject>
